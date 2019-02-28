@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import RentalDetailInfo from "./RentalDetailInfo";
+import RentalMap from './RentalMap';
 import * as actions from "../../../actions";
 
 class RentalDetail extends React.Component {
@@ -12,14 +14,29 @@ class RentalDetail extends React.Component {
 
 	render() {
 		const selectedRental = this.props.selectedRental;
-		if (selectedRental.id) {
+		if (selectedRental._id) {
 			return (
-				<React.Fragment>
-					<div>{selectedRental.title}</div>
-					<div>{selectedRental.city}</div>
-					<div>{selectedRental.description}</div>
-					<div>{selectedRental.dailyRate}.00$</div>
-				</React.Fragment>
+				<section id="rentalDetails">
+					<div className="upper-section">
+						<div className="row">
+							<div className="col-md-6">
+								<img src={selectedRental.image} alt="" />
+							</div>
+							<div className="col-md-6">
+								<RentalMap location={`${selectedRental.city}, ${selectedRental.street}`} />
+							</div>
+						</div>
+					</div>
+
+					<div className="details-section">
+						<div className="row">
+							<div className="col-md-8">
+								<RentalDetailInfo selectedRental={selectedRental} />
+							</div>
+							<div className="col-md-4"> BOOKING</div>
+						</div>
+					</div>
+				</section>
 			);
 		}
 		return <div>Loading....</div>;

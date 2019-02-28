@@ -7,18 +7,15 @@ const INITIAL_STATE = {
 
 const rentalReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case type.FETCH_RENTALS:
+		case type.FETCH_RENTALS_SUCCESS:
 			return {
 				...state,
 				rentals: action.rentals
 			};
 		case type.FETCH_RENTAL_BY_ID:
-			const rental = state.rentals.find(
-				rental => rental.id.toString() === action.id
-			);
 			return {
 				...state,
-				selectedRental: rental
+				selectedRental: action.rental
 			};
 		case type.FETCH_RENTAL_BY_ID_INIT:
 			return {

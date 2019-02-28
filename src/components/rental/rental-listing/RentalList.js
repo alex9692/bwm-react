@@ -7,12 +7,14 @@ class RentalList extends React.Component {
 		return this.props.rentals.map((rental, index) => (
 			<RentalCard
 				key={index}
-				id={rental.id}
+				id={rental._id}
 				title={rental.title}
 				city={rental.city}
 				shared={rental.shared}
 				dailyRate={rental.dailyRate}
 				category={rental.category}
+				image={rental.image}
+				bedrooms={rental.bedrooms}
 			/>
 		));
 	}
