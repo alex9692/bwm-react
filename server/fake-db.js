@@ -10,10 +10,10 @@ class FakeDb {
 				category: "condo",
 				image:
 					"https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
-				bedrooms: 4,
 				shared: true,
 				description: "Very nice apartment in center of the city.",
-				dailyRate: 43
+				dailyRate: 43,
+				bedrooms: 4
 			},
 			{
 				title: "Modern apartment in center",
@@ -22,10 +22,10 @@ class FakeDb {
 				category: "apartment",
 				image:
 					"https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
-				bedrooms: 1,
 				shared: false,
 				description: "Very nice apartment in center of the city.",
-				dailyRate: 11
+				dailyRate: 11,
+				bedrooms: 1
 			},
 			{
 				title: "Old house in nature",
@@ -34,17 +34,17 @@ class FakeDb {
 				category: "house",
 				image:
 					"https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
-				bedrooms: 5,
 				shared: true,
 				description: "Very nice apartment in center of the city.",
-				dailyRate: 23
+				dailyRate: 23,
+				bedrooms: 5
 			}
 		];
-    }
-    
-    async cleanDb() {
-        await Rental.remove({});
-    }
+	}
+
+	async cleanDb() {
+		await Rental.remove({});
+	}
 
 	pushRentalToDb() {
 		this.rentals.forEach(rental => {
@@ -55,7 +55,7 @@ class FakeDb {
 	}
 
 	seeDb() {
-        this.cleanDb();
+		this.cleanDb();
 		this.pushRentalToDb();
 	}
 }
