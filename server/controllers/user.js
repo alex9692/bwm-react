@@ -5,6 +5,7 @@ const { normalizeErrors } = require("../helpers/mongoose");
 const { SECRET } = require("../config/dev");
 
 exports.auth = (req, res) => {
+	console.log(req.body);
 	const { email, password } = req.body;
 
 	if (!password || !email) {
@@ -98,7 +99,7 @@ exports.register = (req, res) => {
 };
 
 exports.authMiddleware = function(req, res, next) {
-	const token = req.headers.authorization;
+	const token = req.headers.Authorization;
 
 	if (token) {
 		const user = parseToken(token);
