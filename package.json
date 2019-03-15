@@ -13,6 +13,7 @@
     "body-parser": "^1.18.3",
     "bootstrap": "^4.0.0",
     "camel-case": "^3.0.0",
+    "chokidar": "^2.1.2",
     "express": "^4.16.4",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",

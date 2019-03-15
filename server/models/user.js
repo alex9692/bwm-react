@@ -1,4 +1,4 @@
-const bcrpyt = require('bcrypt');
+const bcrpyt = require("bcrypt");
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
@@ -25,10 +25,11 @@ const userSchema = new Schema({
 		max: [32, "Too long, max is 32 characters"],
 		required: "Password is required"
 	},
-	rentals: [{ type: Schema.Types.ObjectId, ref: "Rental" }]
+	rentals: [{ type: Schema.Types.ObjectId, ref: "Rental" }],
+	bookings: [{ type: Schema.Types.ObjectId, ref: "Bookings" }]
 });
 
-// userSchema.pre('save', (next) => { 
+// userSchema.pre('save', (next) => {
 //     // const user = ;
 //     console.log(this);
 //     const user = this;
@@ -44,15 +45,15 @@ userSchema.methods.matchPassword = function(requestedPassword) {
 	return bcrpyt.compareSync(requestedPassword, this.password);
 };
 
-userSchema.pre('save', function(next) { 
-    // const user = ;
-    const user = this;
-    bcrpyt.genSalt(10, function(err, salt) {
-        bcrpyt.hash(user.password, salt, function(err, hash) {
-            user.password = hash;
-            next();
-        });
-    });
+userSchema.pre("save", function(next) {
+	// const user = ;
+	const user = this;
+	bcrpyt.genSalt(10, function(err, salt) {
+		bcrpyt.hash(user.password, salt, function(err, hash) {
+			user.password = hash;
+			next();
+		});
+	});
 });
 
 module.exports = mongoose.model("User", userSchema);
