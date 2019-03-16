@@ -95,3 +95,10 @@ export const logout = () => {
 		type: actionTypes.LOGOUT
 	};
 };
+
+export const createBooking = booking => {
+	return axiosInstance
+		.post("/bookings", booking)
+		.then(res => res.data)
+		.catch(err => Promise.reject(err.response.data.errors));
+};
