@@ -4,6 +4,7 @@
 
 @import "./rental/_rental-listing.scss";
 @import "./rental/_rental-detail.scss";
+@import "./booking/_booking.scss";
 
 .page-title {
 	font-size: 30px;
@@ -30,7 +31,9 @@
 	padding: 15px 30px;
 	font-size: 20px;
 
-	&:hover, &:focus,&:active {
+	&:hover,
+	&:focus,
+	&:active {
 		border-color: $main-color !important;
 		background-color: $main-color !important;
 	}
