@@ -1,10 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link /*withRouter*/ } from "react-router-dom";
 import { connect } from "react-redux";
 
+import RentalSearchInput from "../rental/RentalSearchInput";
+
 class Header extends React.Component {
-	renderLogState = () => {
-		const { isAuth } = this.props.auth;
+	renderLogState = isAuth => {
 		if (!isAuth) {
 			return (
 				<React.Fragment>
@@ -24,7 +25,45 @@ class Header extends React.Component {
 		);
 	};
 
+	renderOwnerSection(isAuth, username) {
+		if (isAuth) {
+			return (
+				<React.Fragment>
+					<a className="nav-item nav-link">{username}</a>
+
+					<div className="nav-item dropdown">
+						<a
+							className="nav-link nav-item dropdown-toggle"
+							href="#"
+							id="navbarDropdownMenuLink"
+							data-toggle="dropdown"
+							aria-haspopup="true"
+							aria-expanded="false"
+						>
+							Owner Section
+						</a>
+						<div
+							className="dropdown-menu"
+							aria-labelledby="navbarDropdownMenuLink"
+						>
+							<Link className="dropdown-item" to="/rentals/new">
+								Create Rental
+							</Link>
+							<Link className="dropdown-item" to="#">
+								Manage Rentals
+							</Link>
+							<Link className="dropdown-item" to="#">
+								Manage Bookings
+							</Link>
+						</div>
+					</div>
+				</React.Fragment>
+			);
+		}
+	}
+
 	render() {
+		const { isAuth, username } = this.props.auth;
 		return (
 			<div>
 				<nav className="navbar navbar-dark navbar-expand-lg">
@@ -32,20 +71,7 @@ class Header extends React.Component {
 						<Link className="navbar-brand" to="/rentals">
 							BookWithMe
 						</Link>
-						<form className="form-inline my-2 my-lg-0">
-							<input
-								className="form-control mr-sm-2 bwm-search"
-								type="search"
-								placeholder='Try "New York"'
-								aria-label="Search"
-							/>
-							<button
-								className="btn btn-outline-success my-2 my-sm-0 btn-bwm-search"
-								type="submit"
-							>
-								Search
-							</button>
-						</form>
+						<RentalSearchInput />
 						<button
 							className="navbar-toggler"
 							type="button"
@@ -58,7 +84,10 @@ class Header extends React.Component {
 							<span className="navbar-toggler-icon" />
 						</button>
 						<div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-							<div className="navbar-nav ml-auto">{this.renderLogState()}</div>
+							<div className="navbar-nav ml-auto">
+								{this.renderOwnerSection(isAuth, username)}
+								{this.renderLogState(isAuth)}
+							</div>
 						</div>
 					</div>
 				</nav>
@@ -73,4 +102,5 @@ const mapStateToProps = state => {
 	};
 };
 
+// export default withRouter(connect(mapStateToProps)(Header));
 export default connect(mapStateToProps)(Header);

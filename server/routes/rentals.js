@@ -12,6 +12,6 @@ router.get("/:id", RentalCtrl.getRentalById);
 
 router.get("", RentalCtrl.getRentals);
 
-router.post("", UserCtrl.authMiddleware, RentalCtrl.createRental);
+router.post("/new", UserCtrl.authMiddleware, RentalCtrl.createRental);
 
 module.exports = router;

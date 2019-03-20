@@ -2,7 +2,7 @@ import * as moment from "moment";
 import * as jwt from "jsonwebtoken";
 
 class AuthService {
-    tokenkey = 'auth_token';
+	tokenkey = "auth_token";
 
 	getToken() {
 		return localStorage.getItem(this.tokenkey);
@@ -10,11 +10,11 @@ class AuthService {
 
 	invalidate() {
 		localStorage.removeItem(this.tokenkey);
-    }
-    
-    saveToken(token) {
-        localStorage.setItem(this.tokenkey, token);
-    }
+	}
+
+	saveToken(token) {
+		localStorage.setItem(this.tokenkey, token);
+	}
 
 	decodeToken(token) {
 		return jwt.decode(token);
@@ -23,6 +23,10 @@ class AuthService {
 	getExpirationTime(token) {
 		const exp = this.decodeToken(token).exp;
 		return moment.unix(exp);
+	}
+
+	getUsername() {
+		return this.decodeToken(this.getToken()).username;
 	}
 
 	isValid(token) {

@@ -32,7 +32,7 @@ const rentalSchema = new Schema({
 		type: String,
 		required: true
 	},
-	dailyRate: Number,
+	dailyRate: String,
 	createdAt: {
 		type: Date,
 		default: Date.now
