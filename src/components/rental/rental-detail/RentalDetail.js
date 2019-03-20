@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 
 import RentalDetailInfo from "./RentalDetailInfo";
-import RentalMap from './RentalMap';
-import Booking from '../../booking/Booking';
+import RentalMap from "./RentalMap";
+import Booking from "../../booking/Booking";
 import * as actions from "../../../actions";
 
 class RentalDetail extends React.Component {
@@ -24,7 +24,9 @@ class RentalDetail extends React.Component {
 								<img src={selectedRental.image} alt="" />
 							</div>
 							<div className="col-md-6">
-								<RentalMap location={`${selectedRental.city}, ${selectedRental.street}`} />
+								<RentalMap
+									location={`${selectedRental.city}, ${selectedRental.street}`}
+								/>
 							</div>
 						</div>
 					</div>
@@ -35,7 +37,7 @@ class RentalDetail extends React.Component {
 								<RentalDetailInfo selectedRental={selectedRental} />
 							</div>
 							<div className="col-md-4">
-								<Booking rental={selectedRental}/>
+								<Booking rental={selectedRental} />
 							</div>
 						</div>
 					</div>

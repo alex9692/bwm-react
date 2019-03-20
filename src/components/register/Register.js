@@ -11,7 +11,6 @@ class Register extends React.Component {
 	};
 
 	registerUser = userData => {
-		console.log(userData);
 		register(userData)
 			.then(result => {
 				this.setState({ redirect: true });
@@ -45,7 +44,10 @@ class Register extends React.Component {
 									As our member you have access to most awesome places in the
 									world.
 								</h2>
-								<img src={process.env.PUBLIC_URL + '/img/register-image.jpg'} alt="" />
+								<img
+									src={process.env.PUBLIC_URL + "/img/register-image.jpg"}
+									alt=""
+								/>
 							</div>
 						</div>
 					</div>

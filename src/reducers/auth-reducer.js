@@ -3,7 +3,8 @@ import * as type from "../actions/types";
 const INITIAL_STATE = {
 	isAuth: false,
 	token: "",
-	errors: []
+	errors: [],
+	username: ""
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
@@ -13,21 +14,24 @@ const authReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				isAuth: true,
 				token: action.token,
-				errors: []
+				errors: [],
+				username: action.username
 			};
 		case type.LOGIN_FAILURE:
 			return {
 				...state,
 				isAuth: false,
 				token: "",
-				errors: action.errors
+				errors: action.errors,
+				username: ""
 			};
 		case type.LOGOUT:
 			return {
 				...state,
 				isAuth: false,
 				token: "",
-				errors: []
+				errors: [],
+				username: ""
 			};
 		default:
 			return state;

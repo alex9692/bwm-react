@@ -2,11 +2,24 @@ import * as type from "../actions/types";
 
 const INITIAL_STATE = {
 	rentals: [],
-	selectedRental: {}
+	selectedRental: {},
+	errors: []
 };
 
 const rentalReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
+		case type.FETCH_RENTAL_INIT:
+			return {
+				...state,
+				rentals: [],
+				errors: []
+			};
+		case type.FETCH_RENTAL_FAIL:
+			return {
+				...state,
+				rentals: [],
+				errors: action.errors
+			};
 		case type.FETCH_RENTALS_SUCCESS:
 			return {
 				...state,

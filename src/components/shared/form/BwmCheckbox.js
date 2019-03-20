@@ -4,19 +4,13 @@ const BwmInput = ({
 	input,
 	label,
 	type,
-	symbol,
 	className,
 	meta: { touched, error, warning }
 }) => (
 	<div className="form-group">
-		<label>{label}</label>
+		<label>{label} &nbsp;</label>
 		<div className="input-group">
-			{symbol && (
-				<div className="input-group-prepend">
-					<div className="input-group-text">{symbol}</div>
-				</div>
-			)}
-			<input {...input} type={type} className={className} />
+			<input {...input} type={type} />
 		</div>
 		{touched && (error && <div className="alert-danger">{error}</div>)}
 	</div>

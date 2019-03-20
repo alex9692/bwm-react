@@ -130,7 +130,6 @@ class Booking extends React.Component {
 			},
 			errors => {
 				this.setState({ errors });
-				console.log(errors);
 			}
 		);
 	};
