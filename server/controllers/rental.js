@@ -60,6 +60,48 @@ exports.getRentalById = function(req, res) {
 		});
 };
 
+exports.deleteRentalById = function(req, res) {
+	const user = res.locals.user;
+
+	Rental.findById(req.params.id)
+		.populate("user", "_id")
+		.populate({
+			path: "bookings",
+			select: "startsAt",
+			match: { startsAt: { $gt: new Date() } }
+		})
+		.exec(function(err, foundRental) {
+			if (err) {
+				return res.status(422).send({ errors: normalizeErrors(err.errors) });
+			}
+
+			if (user.id !== foundRental.user.id) {
+				return res.status(422).send({
+					errors: [
+						{ title: "Invalid User!", detail: "You are not the rental owner!" }
+					]
+				});
+			}
+			if (foundRental.bookings.length > 0) {
+				return res.status(422).send({
+					errors: [
+						{
+							title: "Found Active Bookings!",
+							detail: "Cannot delete rental with active bookings!!"
+						}
+					]
+				});
+			}
+			foundRental.remove(function(err) {
+				if (err) {
+					return res.status(422).send({ errors: normalizeErrors(err.errors) });
+				}
+			});
+
+			return res.json({ status: "deleted" });
+		});
+};
+
 exports.getRentals = function(req, res) {
 	const city = req.query.city;
 	const query = city ? { city: city.toLowerCase() } : {};
@@ -81,5 +123,18 @@ exports.getRentals = function(req, res) {
 				});
 			}
 			return res.json(filterRentals);
+		});
+};
+
+exports.manageRentals = function(req, res) {
+	const user = res.locals.user;
+
+	Rental.where({ user })
+		.populate("bookings")
+		.exec(function(err, foundRental) {
+			if (err) {
+				return res.status(422).send({ errors: normalizeErrors(err.errors) });
+			}
+			return res.json(foundRental);
 		});
 };

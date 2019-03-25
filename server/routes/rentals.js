@@ -8,7 +8,11 @@ router.get("/secret", UserCtrl.authMiddleware, (req, res, next) => {
 	res.json({ secret: true });
 });
 
+router.get("/manage", UserCtrl.authMiddleware, RentalCtrl.manageRentals);
+
 router.get("/:id", RentalCtrl.getRentalById);
+
+router.delete("/:id", UserCtrl.authMiddleware, RentalCtrl.deleteRentalById);
 
 router.get("", RentalCtrl.getRentals);
 
