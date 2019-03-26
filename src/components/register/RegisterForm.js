@@ -64,7 +64,7 @@ const validate = values => {
 	}
 
 	if (values.email) {
-		if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(values.email)) {
+		if (!/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(values.email)) {
 			errors.email = "Please enter a valid email!";
 		}
 	}

@@ -130,3 +130,57 @@ export const createRental = rentalData => {
 			return Promise.reject(err.response.data.errors);
 		});
 };
+
+const fetchUserBookingsInit = () => {
+	return {
+		type: actionTypes.FETCH_USER_BOOKINGS_INIT
+	};
+};
+
+const fetchUserBookingsSuccess = bookings => {
+	return {
+		type: actionTypes.FETCH_USER_BOOKINGS_SUCCESS,
+		bookings
+	};
+};
+
+const fetchUserBookingsFailure = errors => {
+	return {
+		type: actionTypes.FETCH_USER_BOOKING_FAILURE,
+		errors
+	};
+};
+
+export const fetchUserBookings = id => dispatch => {
+	dispatch(fetchUserBookingsInit());
+
+	axiosInstance
+		.get("/bookings/manage")
+		.then(res => res.data)
+		.then(bookings => dispatch(fetchUserBookingsSuccess(bookings)))
+		.catch(err => {
+			dispatch(fetchUserBookingsFailure(err.response.data.errors));
+		});
+};
+
+export const getUserRentals = () => {
+	return axiosInstance
+		.get("/rentals/manage")
+		.then(res => {
+			return res.data;
+		})
+		.catch(err => {
+			return Promise.reject(err.response.data.errors);
+		});
+};
+
+export const deleteRental = id => {
+	return axiosInstance
+		.delete(`/rentals/${id}`)
+		.then(res => {
+			return res.data;
+		})
+		.catch(err => {
+			return Promise.reject(err.response.data.errors);
+		});
+};
