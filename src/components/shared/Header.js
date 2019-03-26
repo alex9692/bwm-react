@@ -32,16 +32,17 @@ class Header extends React.Component {
 					<a className="nav-item nav-link">{username}</a>
 
 					<div className="nav-item dropdown">
-						<a
+						<div
 							className="nav-link nav-item dropdown-toggle"
 							href="#"
 							id="navbarDropdownMenuLink"
 							data-toggle="dropdown"
 							aria-haspopup="true"
 							aria-expanded="false"
+							style={{cursor: "pointer"}}
 						>
 							Owner Section
-						</a>
+						</div>
 						<div
 							className="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink"
@@ -49,10 +50,10 @@ class Header extends React.Component {
 							<Link className="dropdown-item" to="/rentals/new">
 								Create Rental
 							</Link>
-							<Link className="dropdown-item" to="#">
+							<Link className="dropdown-item" to="/rentals/manage">
 								Manage Rentals
 							</Link>
-							<Link className="dropdown-item" to="#">
+							<Link className="dropdown-item" to="/bookings/manage">
 								Manage Bookings
 							</Link>
 						</div>
@@ -70,6 +71,10 @@ class Header extends React.Component {
 					<div className="container">
 						<Link className="navbar-brand" to="/rentals">
 							BookWithMe
+							<img
+								src={process.env.PUBLIC_URL + "/img/react-logo.svg"}
+								alt=""
+							/>
 						</Link>
 						<RentalSearchInput />
 						<button

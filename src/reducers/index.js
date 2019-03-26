@@ -4,12 +4,14 @@ import thunk from "redux-thunk";
 import rentalReducer from "./rental-reducer";
 import { reducer as formReducer } from "redux-form";
 import authReducer from "./auth-reducer";
+import bookingReducer from "./booking-reducer";
 
 export const init = () => {
 	const reducer = combineReducers({
 		rentals: rentalReducer,
-        form: formReducer,
-        auth: authReducer
+		form: formReducer,
+		auth: authReducer,
+		bookings: bookingReducer
 	});
 
 	const composeEnhancers =

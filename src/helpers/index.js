@@ -3,10 +3,11 @@ import * as moment from "moment";
 
 export const rentalType = isShared => (isShared ? "shared" : "whole");
 export const toUpperCase = value => (value ? titleize(value) : "");
+export const prettifyDate = date => moment(date).format("MMM Do YY");
 
 export const getRangeOflDates = (startsAt, endsAt, dateFormat) => {
 	const tempDates = [];
-    const mEndsAt = moment(endsAt);
+	const mEndsAt = moment(endsAt);
 	let mStartsAt = moment(startsAt);
 
 	while (mStartsAt < mEndsAt) {

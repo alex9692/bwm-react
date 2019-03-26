@@ -13,7 +13,7 @@ class BwmFileUpload extends React.Component {
 	render() {
 		const {
 			label,
-			meta: { touched, error, warning }
+			meta: { touched, error }
 		} = this.props;
 		return (
 			<div className="form-group">

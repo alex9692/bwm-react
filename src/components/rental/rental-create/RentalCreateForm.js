@@ -7,7 +7,6 @@ import BwmSelect from "../../shared/form/BwmSelect";
 import BwmFileUpload from "../../shared/form/BwmFileUpload";
 import BwmCheckbox from "../../shared/form/BwmCheckbox";
 import BwmResError from "../../shared/form/BwmResError";
-import { required } from "../../shared/form/validator";
 
 const RentalCreateForm = props => {
 	const {
