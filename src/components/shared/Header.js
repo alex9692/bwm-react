@@ -9,7 +9,7 @@ class Header extends React.Component {
 		if (!isAuth) {
 			return (
 				<React.Fragment>
-					<Link className="nav-item nav-link active" to="/login">
+					<Link className="nav-item nav-link" to="/login">
 						Login <span className="sr-only">(current)</span>
 					</Link>
 					<Link className="nav-item nav-link" to="/register">
@@ -39,7 +39,7 @@ class Header extends React.Component {
 							data-toggle="dropdown"
 							aria-haspopup="true"
 							aria-expanded="false"
-							style={{cursor: "pointer"}}
+							style={{ cursor: "pointer" }}
 						>
 							Owner Section
 						</div>
