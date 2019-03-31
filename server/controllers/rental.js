@@ -75,7 +75,7 @@ exports.deleteRentalById = function(req, res) {
 				return res.status(422).send({ errors: normalizeErrors(err.errors) });
 			}
 
-			if (user.id !== foundRental.user.id) {
+			if (user.id.toString() !== foundRental.user.id.toString()) {
 				return res.status(422).send({
 					errors: [
 						{ title: "Invalid User!", detail: "You are not the rental owner!" }
@@ -136,5 +136,55 @@ exports.manageRentals = function(req, res) {
 				return res.status(422).send({ errors: normalizeErrors(err.errors) });
 			}
 			return res.json(foundRental);
+		});
+};
+
+exports.updateRental = function(req, res, next) {
+	const rentalData = req.body;
+	const user = res.locals.user;
+
+	Rental.findById(req.params.id)
+		.populate("user")
+		.exec(function(err, foundRental) {
+			if (err) {
+				return res.status(422).send({ errors: normalizeErrors(err.errors) });
+			}
+			if (foundRental.user._id.toString() !== user._id.toString()) {
+				return res.status(422).send({
+					errors: [
+						{ title: "Invalid User!", detail: "You are not the rental owner!" }
+					]
+				});
+			}
+
+			foundRental.set(rentalData);
+			foundRental.save(function(err) {
+				if (err) {
+					return res.status(422).send({ errors: normalizeErrors(err.errors) });
+				}
+
+				return res.status(200).send(foundRental);
+			});
+		});
+};
+
+exports.verifyUser = function(req, res, next) {
+	const user = res.locals.user;
+
+	Rental.findById(req.params.id)
+		.populate("user")
+		.exec(function(err, foundRental) {
+			if (err) {
+				return res.status(422).send({ errors: normalizeErrors(err.errors) });
+			}
+
+			if (foundRental.user._id.toString() !== user._id.toString()) {
+				return res.status(422).send({
+					errors: [
+						{ title: "Invalid User!", detail: "You are not the rental owner!" }
+					]
+				});
+			}
+			return res.json({ status: "verified" });
 		});
 };

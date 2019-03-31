@@ -3,7 +3,8 @@ import * as type from "../actions/types";
 const INITIAL_STATE = {
 	rentals: [],
 	selectedRental: {},
-	errors: []
+	errors: [],
+	errorsSelectedRental: []
 };
 
 const rentalReducer = (state = INITIAL_STATE, action) => {
@@ -34,6 +35,21 @@ const rentalReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				selectedRental: {}
+			};
+		case type.UPDATE_RENTAL_SUCCESS:
+			return {
+				...state,
+				selectedRental: action.updatedRental
+			};
+		case type.UPDATE_RENTAL_FAILURE:
+			return {
+				...state,
+				errorsSelectedRental: action.errors
+			};
+		case type.RESET_RENTAL_ERRORS:
+			return {
+				...state,
+				errorsSelectedRental: []
 			};
 		default:
 			return state;

@@ -12,7 +12,7 @@ const path = require("path");
 mongoose.connect(config.DB_URI).then(() => {
 	if (process.env.NODE_ENV !== "production") {
 		const fakeDb = new FakeDb();
-		// fakeDb.seeDb();
+		fakeDb.seeDb();
 	}
 });
 

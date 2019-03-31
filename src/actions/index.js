@@ -158,9 +158,7 @@ export const fetchUserBookings = id => dispatch => {
 		.get("/bookings/manage")
 		.then(res => res.data)
 		.then(bookings => dispatch(fetchUserBookingsSuccess(bookings)))
-		.catch(err => {
-			dispatch(fetchUserBookingsFailure(err.response.data.errors));
-		});
+		.catch(err => dispatch(fetchUserBookingsFailure(err.response.data.errors)));
 };
 
 export const getUserRentals = () => {
@@ -183,4 +181,60 @@ export const deleteRental = id => {
 		.catch(err => {
 			return Promise.reject(err.response.data.errors);
 		});
+};
+
+const updateRentalSuccess = updatedRental => {
+	return {
+		type: actionTypes.UPDATE_RENTAL_SUCCESS,
+		updatedRental
+	};
+};
+
+const updateRentalFailure = errors => {
+	return {
+		type: actionTypes.UPDATE_RENTAL_FAILURE,
+		errors
+	};
+};
+
+export const updateRental = (rentalData, id) => dispatch => {
+	return axiosInstance
+		.patch(`/rentals/${id}`, { ...rentalData })
+		.then(res => {
+			return res.data;
+		})
+		.then(rental => {
+			dispatch(updateRentalSuccess(rental));
+			if (
+				rentalData.city !== rental.city ||
+				rentalData.street !== rental.street
+			) {
+				dispatch(reloadMap());
+			}
+		})
+		.catch(({ response }) => {
+			dispatch(updateRentalFailure(response.data.errors));
+		});
+};
+
+export const resetRentalErrors = () => {
+	return {
+		type: actionTypes.RESET_RENTAL_ERRORS
+	};
+};
+
+export const reloadMap = () => {
+	return {
+		type: actionTypes.RELOAD_MAP
+	};
+};
+
+export const reloadMapFinish = () => {
+	return {
+		type: actionTypes.RELOAD_MAP_FINISH
+	};
+};
+
+export const verifyRentalOwner = id => {
+	return axiosInstance.get(`/rentals/${id}/verify-user`);
 };
