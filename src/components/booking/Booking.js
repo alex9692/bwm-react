@@ -111,7 +111,7 @@ class Booking extends React.Component {
 		const { rental } = this.props;
 		this.setState({
 			proposedBooking: {
-				...this.state.proposedBooking,
+				...this.state.proposedBooking,	
 				days: days,
 				totalPrice: days * rental.dailyRate,
 				rental: rental
