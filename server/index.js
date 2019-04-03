@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use("/api/v1/rentals", rentalRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/bookings", bookingRoutes);
-app.use("/api/v1/", imageUploadRoutes);
+app.use("/api/v1", imageUploadRoutes);
 
 if (process.env.NODE_ENV === "production") {
 	const appPath = path.join(__dirname, "..", "build");
